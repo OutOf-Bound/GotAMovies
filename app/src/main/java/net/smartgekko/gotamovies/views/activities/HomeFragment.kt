@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import net.smartgekko.gotamovies.R
 import net.smartgekko.gotamovies.viewmodels.MainViewModel
 
-class MainFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = HomeFragment()
     }
 
     private lateinit var viewModel: MainViewModel

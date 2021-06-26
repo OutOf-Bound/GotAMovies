@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GotAMovies">
-        <activity android:name=".views.activities.MainActivity">
+        <activity android:name=".views.activities.HomeActivity">
+        </activity>
+        <activity android:name=".views.activities.SplashActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
