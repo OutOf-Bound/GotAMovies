@@ -1,7 +1,8 @@
-package net.smartgekko.gotamovies
+package net.smartgekko.gotamovies.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import net.smartgekko.gotamovies.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
