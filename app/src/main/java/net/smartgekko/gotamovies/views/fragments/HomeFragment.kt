@@ -1,4 +1,4 @@
-package net.smartgekko.gotamovies.views.activities
+package net.smartgekko.gotamovies.views.fragments
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,32 +23,32 @@ class HomeFragment : Fragment() {
     private lateinit var moviesList: RecyclerView
     private lateinit var moviesAdapter: MoviesAdapter
     private var fullMovieList: ArrayList<Movie> = ArrayList()
-    private var currentOffset:Int=0;
+    private var currentOffset: Int = 0
 
     companion object {
         fun newInstance() = HomeFragment()
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.home_fragment, container, false)
         val activity = activity as Context
         moviesList = view.findViewById(R.id.movies_list)
-        moviesList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        moviesList.addOnScrollListener( object : RecyclerView.OnScrollListener() {
+        moviesList.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        moviesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (!recyclerView.canScrollVertically(1)) {
                     viewModel.getMovieList(currentOffset)
                 }
             }
-        });
+        })
         moviesAdapter = MoviesAdapter(listOf())
         moviesList.adapter = moviesAdapter
+        moviesList.setItemViewCacheSize(20)
         return view
     }
 
@@ -75,15 +74,14 @@ class HomeFragment : Fragment() {
             }
             is AppState.Error -> {
                 loadingLayout?.visibility = View.GONE
-                Toast.makeText(context, "No more movies available", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.no_movies_available, Toast.LENGTH_LONG).show()
             }
         }
     }
 
     private fun setData(movieData: List<Movie>) {
-        var tempList: ArrayList<Movie> = ArrayList<Movie>()
-            fullMovieList.addAll(movieData);
-            currentOffset+=20
-            moviesAdapter.updateMovies(fullMovieList)
+        fullMovieList.addAll(movieData)
+        currentOffset += 20
+        moviesAdapter.updateMovies(fullMovieList)
     }
 }

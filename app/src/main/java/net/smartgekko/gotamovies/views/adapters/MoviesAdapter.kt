@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import net.smartgekko.gotamovies.R
 import net.smartgekko.gotamovies.model.Movie
+import java.lang.NullPointerException
 
 class MoviesAdapter(private var movies: List<Movie>) :
     RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
@@ -26,7 +27,6 @@ class MoviesAdapter(private var movies: List<Movie>) :
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(movies[position])
-
     }
 
     fun updateMovies(movies: List<Movie>) {
@@ -35,29 +35,31 @@ class MoviesAdapter(private var movies: List<Movie>) :
     }
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         private val poster: ImageView = itemView.findViewById(R.id.item_movie_poster)
         private val title: TextView = itemView.findViewById(R.id.item_movie_title)
-        private val release_date: TextView = itemView.findViewById(R.id.item_movie_release_date)
-        private val overwiew: TextView = itemView.findViewById(R.id.item_movie_overview)
+        private val releaseDate: TextView = itemView.findViewById(R.id.item_movie_release_date)
+        private val overview: TextView = itemView.findViewById(R.id.item_movie_overview)
 
         fun bind(movie: Movie) {
-            Glide.with(itemView)
-                .load(movie.multimedia.posterPath)
-                .transform(CenterCrop())
-                .into(poster)
+            try {
+                Glide.with(itemView)
+                    .load(movie.multimedia.posterPath)
+                    .transform(CenterCrop())
+                    .into(poster)
 
+            } catch (e: NullPointerException) {
+                poster.setImageResource(R.drawable.no_image_avl)
+            }
             title.text = movie.title
-            release_date.text = movie.releaseDate
+            releaseDate.text = movie.releaseDate
 
+            val stringLimit = 250
+            val overviewString: String = movie.overview
 
-            val string_limit = 250
-            val overview_string: String = movie.overview
-
-            if (overview_string.length < string_limit) {
-                overwiew.text = overview_string
+            if (overviewString.length < stringLimit) {
+                overview.text = overviewString
             } else {
-                overwiew.text = overview_string.substring(0, string_limit) + "..."
+                overview.text = overviewString.substring(0, stringLimit) + "..."
             }
         }
     }

@@ -4,14 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import net.smartgekko.gotamovies.R
 import net.smartgekko.gotamovies.databinding.ActivityHomeBinding
+import net.smartgekko.gotamovies.views.fragments.HomeFragment
 
 class HomeActivity : AppCompatActivity() {
-    lateinit var binding:ActivityHomeBinding
+    lateinit var binding: ActivityHomeBinding
 
     override fun onBackPressed() {}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if (savedInstanceState == null) {
@@ -25,7 +27,6 @@ class HomeActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.close -> {
                     finishAndRemoveTask()
-
                     true
                 }
                 else -> false

@@ -47,7 +47,7 @@ object MainRepository {
         onSuccess: (moviesList: List<Movie>) -> Unit,
         onError: (t: Throwable) -> Unit
     ) {
-        api.getMoviesFromApi(offset,nytApiKey)
+        api.getMoviesFromApi(offset, nytApiKey)
             .enqueue(object : Callback<GetMoviesResponse> {
 
                 override fun onResponse(

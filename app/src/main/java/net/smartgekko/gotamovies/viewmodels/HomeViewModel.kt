@@ -7,16 +7,15 @@ import net.smartgekko.gotamovies.model.Movie
 import net.smartgekko.gotamovies.repository.MainRepository
 
 class HomeViewModel(private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()) :
-    ViewModel(), LifecycleObserver{
-    private  var setOffset: Int =0
+    ViewModel(), LifecycleObserver {
+    private var setOffset: Int = 0
 
     fun getLiveData() = liveDataToObserve
 
-    fun getMovieList(offset:Int) {
-        setOffset=offset
+    fun getMovieList(offset: Int) {
+        setOffset = offset
         getDataFromLocalSource()
     }
-
 
     private fun getDataFromLocalSource() {
         liveDataToObserve.value = AppState.Loading
@@ -26,7 +25,7 @@ class HomeViewModel(private val liveDataToObserve: MutableLiveData<AppState> = M
                 liveDataToObserve.postValue(AppState.Success(movies))
             }
 
-            fun onError(throwable: Throwable){
+            fun onError(throwable: Throwable) {
                 liveDataToObserve.postValue(AppState.Error(throwable))
             }
 
