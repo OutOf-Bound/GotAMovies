@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.smartgekko.gotamovies">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/gam_logo_6"
@@ -9,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GotAMovies">
-        <activity android:name=".views.activities.HomeActivity">
+        <activity android:name=".views.activities.HomeActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+
         </activity>
         <activity android:name=".views.activities.SplashActivity">
             <intent-filter>

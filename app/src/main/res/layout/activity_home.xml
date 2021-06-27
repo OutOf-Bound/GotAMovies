@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="#000000"
+            app:menu="@menu/close_only_menu"
             app:title="Movies list"
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium" />
     </com.google.android.material.appbar.AppBarLayout>
